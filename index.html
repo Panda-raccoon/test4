@@ -35,56 +35,64 @@
 
     <main>
       <div class="container">
-        <h2>오늘의 코딩 일기</h2>
-        <form class="diary-form">
-          <div class="form-group">
-            <label for="date">날짜</label>
-            <input type="date" id="date" name="date" required />
-          </div>
+        <!-- 홈 섹션 -->
+        <section id="home-section">
+          <h2>오늘의 코딩 일기</h2>
+          <p>
+            환영합니다! 상단 메뉴에서 일기를 작성하거나, 저장된 일기 목록을
+            확인할 수 있습니다.
+          </p>
+        </section>
 
-          <div class="form-group">
-            <label for="title">제목</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              placeholder="오늘의 제목을 입력하세요"
-              required
-            />
-          </div>
+        <!-- 일기쓰기 섹션 -->
+        <section id="write-section" style="display: none">
+          <h2>일기 작성</h2>
+          <form class="diary-form">
+            <div class="form-group">
+              <label for="date">날짜</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="form-group">
+              <label for="title">제목</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="오늘의 제목을 입력하세요"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="content">내용</label>
+              <textarea
+                id="content"
+                name="content"
+                rows="10"
+                placeholder="오늘 배운 것, 느낀 점, 다음에 할 일 등을 자유롭게 작성해보세요..."
+                required
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="mood">오늘의 기분</label>
+              <select id="mood" name="mood">
+                <option value="">기분을 선택하세요</option>
+                <option value="happy">😊 행복</option>
+                <option value="excited">🤩 신남</option>
+                <option value="normal">😐 보통</option>
+                <option value="tired">😴 피곤</option>
+                <option value="frustrated">😤 답답</option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">저장하기</button>
+              <button type="reset" class="btn-secondary">다시쓰기</button>
+            </div>
+          </form>
+        </section>
 
-          <div class="form-group">
-            <label for="content">내용</label>
-            <textarea
-              id="content"
-              name="content"
-              rows="10"
-              placeholder="오늘 배운 것, 느낀 점, 다음에 할 일 등을 자유롭게 작성해보세요..."
-              required
-            ></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="mood">오늘의 기분</label>
-            <select id="mood" name="mood">
-              <option value="">기분을 선택하세요</option>
-              <option value="happy">😊 행복</option>
-              <option value="excited">🤩 신남</option>
-              <option value="normal">😐 보통</option>
-              <option value="tired">😴 피곤</option>
-              <option value="frustrated">😤 답답</option>
-            </select>
-          </div>
-
-          <div class="form-actions">
-            <button type="submit" class="btn-primary">저장하기</button>
-            <button type="reset" class="btn-secondary">다시쓰기</button>
-          </div>
-        </form>
-
-        <!-- 일기 목록 및 상세 보기 영역 -->
-        <section id="diary-list-section">
-          <h3>일기 목록</h3>
+        <!-- 목록 섹션 -->
+        <section id="list-section" style="display: none">
+          <h2>일기 목록</h2>
           <ul id="diary-list"></ul>
           <div id="diary-detail" style="display: none"></div>
         </section>

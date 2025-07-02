@@ -117,7 +117,7 @@ function getMoodEmoji(mood) {
   }
 }
 
-// 폼 제출 이벤트
+// 폼 제출 이벤트 (저장 후 목록 페이지로 이동)
 const diaryForm = document.querySelector(".diary-form");
 diaryForm.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -129,12 +129,41 @@ diaryForm.addEventListener("submit", function (e) {
   const diaries = getDiaries();
   diaries.unshift({ date, title, content, mood }); // 최신순
   saveDiaries(diaries);
-  renderDiaryList();
   diaryForm.reset();
+  showSection("list"); // 저장 후 목록으로 이동
 });
 
-// 페이지 로드 시 목록 렌더링
-window.addEventListener("DOMContentLoaded", renderDiaryList);
+// 페이지 전환 기능
+const navLinks = document.querySelectorAll("nav a");
+const sections = {
+  home: document.getElementById("home-section"),
+  write: document.getElementById("write-section"),
+  list: document.getElementById("list-section"),
+};
+
+function showSection(section) {
+  Object.values(sections).forEach((sec) => (sec.style.display = "none"));
+  sections[section].style.display = "block";
+  // 네비게이션 active 표시
+  navLinks.forEach((link) => link.classList.remove("active"));
+  const navMap = { home: 0, write: 1, list: 2 };
+  navLinks[navMap[section]].classList.add("active");
+  // 목록 진입 시 목록 렌더링
+  if (section === "list") renderDiaryList();
+}
+
+navLinks[0].addEventListener("click", (e) => {
+  e.preventDefault();
+  showSection("home");
+});
+navLinks[1].addEventListener("click", (e) => {
+  e.preventDefault();
+  showSection("write");
+});
+navLinks[2].addEventListener("click", (e) => {
+  e.preventDefault();
+  showSection("list");
+});
 
 // 폰트 크기 조절 기능
 const MIN_FONT_SIZE = 12;
@@ -168,4 +197,7 @@ document.getElementById("decreaseFont").addEventListener("click", function () {
   }
 });
 
-window.addEventListener("DOMContentLoaded", applyFontSize);
+window.addEventListener("DOMContentLoaded", function () {
+  showSection("home");
+  applyFontSize();
+});
